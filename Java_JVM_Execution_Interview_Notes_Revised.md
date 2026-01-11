@@ -1,58 +1,53 @@
 
-# Java Interview Notes – JVM, JDK, JRE & Execution Flow (Revised)
+# Java Interview Notes – JVM, JDK, JRE, Execution Flow & Basics (Revised)
 
 ---
 
 ## 1️⃣ JDK vs JRE vs JVM
 
 ### 🔹 JDK (Java Development Kit)
-The **JDK** provides all the **tools and libraries required to write and develop Java programs**.
-
-It is used when you are **writing, compiling, and debugging Java code**.
+The **JDK** provides tools and libraries that help developers **write, compile, and debug Java code**.
 
 Includes:
 - Compiler (`javac`)
 - Debugger (`jdb`)
 - Development tools (`jar`, `javadoc`, `jshell`)
 - Standard Java libraries
-- JRE (internally)
+- JRE
 
-📌 **Purpose**: Development (write + debug + compile)
+📌 Used during **development phase**.
 
 ---
 
 ### 🔹 JRE (Java Runtime Environment)
-The **JRE provides the runtime environment required to run a Java program**.
-
-It is used when:
-- You want to **execute** Java applications
-- You are **not writing or compiling code**
+The **JRE provides the runtime environment required to run Java programs**.
 
 Includes:
 - JVM
-- Core Java class libraries
+- Core Java libraries
 
 ❌ Does NOT include compiler or debugger
 
-📌 **Purpose**: Runtime execution only
+📌 Used during **execution phase**.
 
 ---
 
 ### 🔹 JVM (Java Virtual Machine)
-The **JVM is responsible for executing Java bytecode**.
+The **JVM executes Java bytecode and converts it into machine code**.
 
-It:
-- Converts bytecode into machine code
+Responsibilities:
+- Loads `.class` files
+- Verifies bytecode
+- Executes bytecode
 - Manages memory
-- Handles garbage collection
-- Ensures security
+- Performs garbage collection
 
-📌 JVM is **platform dependent**
-📌 Bytecode is **platform independent**
+📌 Bytecode → Platform Independent  
+📌 JVM → Platform Dependent
 
 ---
 
-### 🔹 Relationship Summary
+### 🔹 Relationship
 ```
 JDK → JRE → JVM
 ```
@@ -72,57 +67,32 @@ Machine Code (Platform Dependent)
 
 ---
 
-### 🔹 Step 1: Compilation Phase
-- Source code (`test.java`) is compiled using **javac**
-- Output is a **`.class` file**
+### 🔹 Compilation Phase
+- `test.java` is compiled using **javac**
+- Output is a `.class` file
 - `.class` file contains **bytecode**
-- Bytecode is **platform independent**
 
 ```
-test.java → javac → test.class (bytecode)
+test.java → javac → test.class
 ```
 
 ---
 
-### 🔹 Step 2: Class Loading
-- JVM loads `.class` file using **ClassLoader**
-- Required classes are loaded into memory
+### 🔹 Execution Phase (Inside JVM)
 
----
-
-### 🔹 Step 3: Execution Phase (Inside JVM)
-
-JVM executes bytecode using:
-
-### 🔸 Interpreter
-- Reads bytecode
-- Parses instructions
+#### 🔸 Interpreter
+- Parses bytecode instructions
+- Groups instructions
 - Interprets **line by line**
 - Slower execution
-- Repeats interpretation every time method is called
+- Repeats work for every call
 
-📌 **Interpreter parses once and groups instructions, but executes line by line**
-
----
-
-### 🔸 JIT (Just-In-Time Compiler)
-- Detects **frequently executed code**
-- Converts bytecode directly into **machine code**
+#### 🔸 JIT (Just-In-Time Compiler)
+- Identifies frequently executed code
+- Converts bytecode directly to machine code
 - Improves performance
-- Avoids repeated interpretation
 
-📌 JVM uses **both Interpreter and JIT together**
-
----
-
-### 🔹 Execution Flow Inside JVM
-```
-.class (Bytecode)
-   ↓
-Interpreter  →  JIT Compiler
-   ↓
-Machine Code (OS dependent)
-```
+📌 JVM uses **Interpreter + JIT together**
 
 ---
 
@@ -135,23 +105,22 @@ Used for:
 - Reference variables
 
 Characteristics:
-- LIFO (Last In First Out)
+- LIFO structure
 - Fast access
 - Thread-safe
-- Automatically cleared when method execution ends
+- Automatically cleared
 
 ---
 
 ### 🔹 Heap Memory
 Used for:
-- Object storage
+- Objects
 - Class instances
 
 Characteristics:
 - Shared among threads
-- Slower access
+- Slower than stack
 - Managed by Garbage Collector
-- Larger memory size
 
 ---
 
@@ -163,14 +132,6 @@ Characteristics:
 | Speed | Faster | Slower |
 | Thread Safe | Yes | No |
 | Garbage Collected | No | Yes |
-
----
-
-### 🔹 Example
-```java
-int x = 10;                 // stored in stack
-Student s = new Student();  // reference in stack, object in heap
-```
 
 ---
 
@@ -190,9 +151,7 @@ Characteristics:
 
 ### 🔹 Reference Types
 Examples:
-- Objects
-- Arrays
-- Strings
+- Objects, Arrays, Strings
 
 Characteristics:
 - Store memory address
@@ -202,21 +161,58 @@ Characteristics:
 
 ---
 
-### 🔹 Comparison
+## 5️⃣ Java Hello World Program – Code Breakdown
 
-| Feature | Primitive | Reference |
-|------|----------|----------|
-| Stores | Actual value | Memory address |
-| Location | Stack | Stack + Heap |
-| Null Allowed | No | Yes |
+### 🔹 Code Example
+```java
+class Test {
+    public static void main(String[] args) {
+        System.out.println("Hello World");
+    }
+}
+```
+
+---
+
+### 🔹 Breakdown of Code
+
+#### 🔸 `class Test`
+- Defines a class named `Test`
+- Every Java program must have at least one class
+
+---
+
+#### 🔸 `public static void main(String[] args)`
+- **public**: JVM can access this method
+- **static**: No object needed to call the method
+- **void**: No return value
+- **main**: Entry point of Java program
+- **String[] args**: Command-line arguments
+
+---
+
+#### 🔸 `System.out.println("Hello World");`
+
+##### `System`
+- Class in `java.lang` package
+- Provides access to system resources like console
+
+##### `out`
+- Static instance of `PrintStream` class
+- Represents standard output stream
+
+##### `println`
+- Method of `PrintStream` class
+- Prints text and moves cursor to next line
 
 ---
 
 ## 🧠 Interview One-Liners
 
-- JDK is used for development, JRE is used for execution.
-- Bytecode is platform independent, JVM is platform dependent.
-- `.class` file contains bytecode.
-- Interpreter executes bytecode line by line.
-- JIT improves performance by compiling frequently used code.
-- Objects are stored in heap, references are stored in stack.
+- `.class` file contains bytecode
+- Bytecode is platform independent
+- JVM converts bytecode to machine code
+- Interpreter executes bytecode line by line
+- JIT improves performance
+- Objects live in heap, references live in stack
+- `main()` is the entry point of Java program
