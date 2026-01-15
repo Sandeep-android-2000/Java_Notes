@@ -1,5 +1,5 @@
 
-# Java Interview Notes – Inner Classes in Java
+# Java Interview Notes – Inner Classes in Java (Updated)
 
 ---
 
@@ -119,7 +119,7 @@ inner.show();
 ## 5️⃣ Local Inner Class
 
 ### 🔹 Definition
-A local inner class is defined inside a method.
+A local inner class is defined inside a **method, constructor, or block**.
 
 ---
 
@@ -141,14 +141,20 @@ class Outer {
 }
 ```
 
-📌 Local variables must be effectively final.
+📌 Local variables used must be **effectively final**.
 
 ---
 
 ## 6️⃣ Anonymous Inner Class
 
 ### 🔹 Definition
-An anonymous inner class has no name and is used for one-time implementation.
+An **anonymous inner class** is a class **without a name**.
+
+📌 It is mainly used when we want to use an **implementation only one time**.
+
+Commonly used with:
+- Interfaces
+- Abstract classes
 
 ---
 
@@ -172,6 +178,14 @@ class Test {
 
 ---
 
+### 🔹 Characteristics
+- No class name
+- One-time use only
+- Cannot have constructors
+- Replaced largely by lambda expressions
+
+---
+
 ## 7️⃣ Comparison Table
 
 | Type | Outer Object Needed | Static Allowed |
@@ -186,9 +200,9 @@ class Test {
 ## 🧠 Interview One-Liners
 
 - Member inner class depends on outer object
-- Static inner class is class-level
+- Static inner class belongs to class
 - Local inner class is method scoped
-- Anonymous inner class is one-time use
+- Anonymous inner class is used for **one-time implementation**
 
 ---
 
@@ -197,4 +211,4 @@ class Test {
 Member → Instance dependent  
 Static → No outer object  
 Local → Method scope  
-Anonymous → No name
+Anonymous → One-time use
