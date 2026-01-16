@@ -43,10 +43,10 @@ String s2 = s1.concat(" World");
 ---
 
 ### 🔹 Why String is Immutable?
-- Security (String Pool)
-- Thread safety
-- Performance optimization
-- Used as keys in HashMap
+- Security (String Pool): Sensitive data like database passwords, usernames, and connection URLs are passed as strings. Immutability prevents unauthorized modification, protecting against attacks such as SQL injection or malicious class loading.
+- Thread safety: immutable strings can be safely shared across multiple threads without synchronization. Since the value never changes, there’s no risk of data corruption during concurrent access
+- Performance optimization: Java maintains a String Pool in heap memory to reuse string literals.  Immutability allows multiple variables to reference the same string object without fear of unintended changes, saving significant memory. 
+- Used as keys in HashMap: The hashcode of an immutable string is calculated once and cached. This makes strings ideal as keys in HashMaps, HashSets, and other hash-based collections, improving performance.
 
 ---
 
